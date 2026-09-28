@@ -52,3 +52,14 @@ def cantidad_ciudades_totales (observaciones):
         if datos_ciudades ["sensacion_termica"] != "No se calcula":
             contador = contador +1
     return contador
+def top_ciudades (observaciones,lugares,n=5, descendente=True ):
+    ciudades_correctas = []
+    for ciudad in observaciones:
+        datos_ciudad = observaciones[ciudad]
+        valor = datos_ciudad[lugares]
+        if valor != "No se calcula":
+            ciudades_correctas.append((valor,ciudad))
+    ciudades_ordenadas = sorted(ciudades_correctas)
+    if descendente:
+        ciudades_ordenadas.reverse()
+    return ciudades_ordenadas[:n]
