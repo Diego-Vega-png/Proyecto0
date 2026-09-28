@@ -25,7 +25,7 @@ def datos_clima(datos):
                 ciudad = auxiliar[0].strip()
                 sensacion_t = auxiliar[6].strip()
                 if sensacion_t == "No se calcula":
-                    st = None
+                    st = "No se calcula"
                 else: 
                     st = float(sensacion_t)
                 direccion_v, velocidad_v = viento(auxiliar[8])
@@ -43,4 +43,12 @@ def datos_clima(datos):
                 }
     archivo.close()
     return elementos 
-
+def cantidad_ciudades(observaciones):
+    return len(observaciones)
+def cantidad_ciudades_totales (observaciones):
+    contador = 0
+    for ciudades in observaciones:
+        datos_ciudades = observaciones[ciudades]
+        if datos_ciudades ["sensacion_termica"] != "No se calcula":
+            contador = contador +1
+    return contador
