@@ -1,8 +1,9 @@
 from datetime import date, time, datetime, timedelta
 def viento(cantidad_viento):
-    if not cantidad_viento or cantidad_viento.strip().lower() == "sin_viento":
-        return "sin_viento", 0.0
-    lugares = cantidad_viento.strip().split()
+    dato_viento = cantidad_viento.strip()
+    if not dato_viento or dato_viento.lower() == "calma":
+        return "calma", 0.0
+    lugares = dato_viento.split()
     if len(lugares) >= 2:
         ubicaciones = " ".join(lugares[:-1])
         kms = float(lugares[-1])
