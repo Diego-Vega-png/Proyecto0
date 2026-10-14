@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 from datetime import date, time, datetime, timedelta
 def viento(cantidad_viento):
     dato_viento = cantidad_viento.strip()
@@ -27,7 +29,7 @@ def fecha_hora(fecha, hora):
 def datos_clima(datos):
     elementos = {}
     lineas_descartadas = 0
-    archivo = open(datos, "r")
+    archivo = open(datos, "r", encoding="utf-8")
     for linea in archivo:
         linea = linea.strip()
         if linea != "":
@@ -43,10 +45,11 @@ def datos_clima(datos):
                 
                 direccion_v, velocidad_v = viento(auxiliar[8])
                 fcha_hra = fecha_hora(auxiliar[1], auxiliar[2])
+                fcha_hra_iso = fcha_hra.isoformat(timespec='minutes')
                 humedad_limpia = auxiliar[7].strip().replace("/","").strip()
                 presion_limpia = auxiliar[9].strip().replace("/","").strip()
                 elementos[ciudad] = {
-                    "fecha_hora": fcha_hra,
+                    "fecha_hora": fcha_hra_iso,
                     "estado": auxiliar[3].strip(),
                     "visibilidad": auxiliar[4].strip(),
                     "temperatura": float(auxiliar[5].strip()),
